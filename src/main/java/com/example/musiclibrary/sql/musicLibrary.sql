@@ -29,7 +29,6 @@ CREATE TABLE album
     CONSTRAINT album_artist_fk FOREIGN KEY (artistId) REFERENCES artists(artistId)
 );
 
-
 CREATE TABLE songs
 (
     songId         INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
