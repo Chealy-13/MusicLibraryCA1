@@ -1,8 +1,8 @@
 package business;
 
-public class playlist {
+public class Playlist {
     /*
-    CREATE TABLE playlist
+    CREATE TABLE Playlist
 (
     playlistId INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userId     INT UNSIGNED NOT NULL,
@@ -12,5 +12,13 @@ public class playlist {
     CONSTRAINT fk_playlist_user FOREIGN KEY (userId) REFERENCES users(userId)
 );
     */
+    // Fields
+    private int playlistId;
+    private int type;
+
+    // Constructors
+    public Playlist(){
+
+    }
 
 }
