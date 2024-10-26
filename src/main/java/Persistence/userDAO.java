@@ -1,5 +1,9 @@
 package Persistence;
 
-public class userDAO {
-}
+import business.user;
+
+public interface userDAO {
+
+    user usernames(String u);
+    }
 
