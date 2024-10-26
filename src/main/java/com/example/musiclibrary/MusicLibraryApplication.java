@@ -1,13 +1,25 @@
 package com.example.musiclibrary;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import Persistence.userDAO;
+import Persistence.userDAOImpl;
 
-@SpringBootApplication
+import java.sql.*;
+
+
 public class MusicLibraryApplication {
+	private static final String url = "jdbc:mysql://localhost:3306/musiclibary";
+	private static final String username = "root";
+	private static final String password = "";
 
-	public static void main(String[] args) {
-		SpringApplication.run(MusicLibraryApplication.class, args);
+	private userDAO UserDAO;
+
+	public MusicLibraryApplication() {
+		try {
+			Connection connection = DriverManager.getConnection(url, username, password);
+			UserDAO = new userDAOImpl(connection) {
+			};
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
 }
