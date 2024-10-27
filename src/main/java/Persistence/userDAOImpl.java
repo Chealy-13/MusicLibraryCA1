@@ -8,13 +8,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Implementation of the UserDAO interface
+ * to manage user records in database.
+ */
 public abstract class userDAOImpl implements userDAO {
     private final Connection connection;
+
+    /**
+     * Constructs a UserDAOImpl with the specified database connection.
+     * @param con is the Connection object to connect to the database.
+     */
 
     public userDAOImpl(Connection con) {
         this.connection = con;
     }
-
+    /**
+     * Collects a user from the database by username,
+     * @return a User object if found, or if no matching user is found.
+     */
     @Override
     public user usernames(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
