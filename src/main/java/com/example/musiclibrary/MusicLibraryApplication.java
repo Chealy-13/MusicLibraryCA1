@@ -46,6 +46,25 @@ public class MusicLibraryApplication {
 		}
 	}
 
+	public void login() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Login to account: ");
+
+        System.out.println("Please enter your username: ");
+		String username = scanner.nextLine();
+
+		System.out.println("Please enter your passwords: ");
+		String password = scanner.nextLine();
+
+		 user user = userDAO.usernames(username);
+		  if (user != null && user.getPassword().equals(password)) {
+			System.out.println("Welcome " + username);
+		  }
+		  else {
+
+			  System.out.println("Invalid credentials! Please try again!");
+		  }
+	}
 
 
    public static void main(String[] args) {
@@ -65,6 +84,9 @@ public class MusicLibraryApplication {
 			switch (choice1) {
 				case 1:
 					a.register();
+					break;
+				case 2:
+					a.login();
 					break;
 			}
 		}
