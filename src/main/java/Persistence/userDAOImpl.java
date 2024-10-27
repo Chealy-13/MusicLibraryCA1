@@ -23,7 +23,7 @@ public abstract class userDAOImpl implements userDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return new user(
-                        rs.getInt("user_Id"),
+                        rs.getInt("userId"),
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getString("email")
@@ -35,15 +35,15 @@ public abstract class userDAOImpl implements userDAO {
         return null;
     }
 
+@Override
     public boolean save(user u) {
+
         String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
         try (PreparedStatement state = connection.prepareStatement(sql)) {
-            
             state.setString(1, u.getUser_name());
             state.setString(2, u.getPassword());
             state.setString(3, u.getEmail());
             return state.executeUpdate() > 0;
-
         } catch (SQLException E) {
             E.printStackTrace();
         }
