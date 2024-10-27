@@ -2,8 +2,10 @@ package com.example.musiclibrary;
 
 import Persistence.userDAO;
 import Persistence.userDAOImpl;
+import business.user;
 
 import java.sql.*;
+import java.util.Scanner;
 
 
 public class MusicLibraryApplication {
@@ -22,4 +24,21 @@ public class MusicLibraryApplication {
 			e.printStackTrace();
 		}
 	}
+   public static void main(String[] args) {
+		MusicLibraryApplication app = new MusicLibraryApplication();
+		Scanner scanner = new Scanner(System.in);
+
+		while (true) {
+			System.out.println("1. Register: ");
+			System.out.println("2. Login: ");
+			System.out.println("3: ");
+			System.out.println("4. : ");
+			System.out.println("5. : ");
+
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+
+			 }
+		
+   }
 }
