@@ -47,6 +47,11 @@ public abstract class userDAOImpl implements userDAO {
         return null;
     }
 
+    /**
+     * Saves a new user to the database,
+     * @param u User object is saved.
+     * @return true if user is successfully saved, if not false.
+     */
 @Override
     public boolean save(user u) {
 
