@@ -2,6 +2,8 @@ package business;
 import lombok.*;
 // Add getter methods
 @Getter
+// Add setter methds
+@Setter
 // Add a toString method
 @ToString
 // Add equals and hashcode methods - only include the specifically noted variables
