@@ -2,10 +2,14 @@ package Persistence;
 
 import business.Song;
 
+import java.util.List;
+
 public interface SongDAO {
     Song getById(int id);
-    //get all songs
-    //getByartistID
+
+    List<Song> getAllSongs();
+
+    Song getByArtistId(int artistId);
     // add song
     //delete song
 
