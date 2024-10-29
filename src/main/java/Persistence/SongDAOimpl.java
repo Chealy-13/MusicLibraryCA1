@@ -21,7 +21,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
 //    }
 
     @Override
-    public Song getById(int id) {
+    public Song getBySongId(int songId) {
         Song song = null;
 
         // Get a connection using the superclass
@@ -32,7 +32,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
         try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM songs where songId = ?")) {
 
             // Fill in the blanks, i.e. parameterize the query
-            ps.setInt(1, id);
+            ps.setInt(1, songId);
                     // TRY to execute the query
                     try (ResultSet rs = ps.executeQuery()) {
                         // Extract the information from the result set
@@ -124,6 +124,35 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
             super.freeConnection(conn);
         }
         return song;
+    }
+
+    @Override
+    public boolean deleteBySongId(int songId) {
+        int rowsAffected = 0;
+
+        Connection conn = super.getConnection();
+        try (PreparedStatement ps = conn.prepareStatement("DELETE FROM songs where songId = ?")) {
+            // Fill in the blanks, i.e. parameterize the query
+            ps.setInt(1, songId);
+
+            // Execute the operation
+            // Remember that when you are doing an update, a delete or an insert,
+            // your only result will be a number indicating how many rows were affected
+            rowsAffected = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred when attempting to prepare/execute SQL.");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the superclass method
+            super.freeConnection(conn);
+        }
+
+        if (rowsAffected > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private Song mapRow(ResultSet rs) throws SQLException {
