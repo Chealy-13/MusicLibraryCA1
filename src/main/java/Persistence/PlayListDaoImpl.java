@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * Implementation of the PlayListDAO interface
  * to manage PlayList records in database.
  */
-public abstract class PlayListDaoImpl extends Song implements PlayListDao{
+public abstract class PlayListDaoImpl  implements PlayListDao{
 
     private final Connection connection;
 
