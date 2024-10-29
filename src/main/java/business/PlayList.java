@@ -1,6 +1,13 @@
 package business;
 
-public class Playlist {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PlayList {
     /*
     CREATE TABLE Playlist
 (
@@ -14,11 +21,10 @@ public class Playlist {
     */
     // Fields
     private int playlistId;
+    private int userId;
+    private String name;
     private int type;
 
-    // Constructors
-    public Playlist(){
 
-    }
 
 }
