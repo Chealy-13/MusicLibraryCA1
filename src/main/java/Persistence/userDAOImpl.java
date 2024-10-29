@@ -75,6 +75,11 @@ public class userDAOImpl implements userDAO {
 
     }
 
+    /**
+     * Deletes user based on username from database
+     * @param username of user will be deleted
+     * @return true if the user was successfully deleted, false otherwise or if an error occurred
+     */
     @Override
     public boolean deleteByUsername(String username) {
         String sql = "DELETE FROM users WHERE username = ?";
