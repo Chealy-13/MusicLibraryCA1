@@ -12,6 +12,7 @@ public interface SongDAO {
     Song getByArtistId(int artistId);
 
     boolean deleteBySongId(int songId);
-    // add song
+
+    boolean addSong(Song song);
 
 }

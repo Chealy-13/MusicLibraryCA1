@@ -155,6 +155,42 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
         }
     }
 
+    @Override
+    public boolean addSong(Song song) {
+        int rowsAffected = 0;
+
+        // Get a connection using the superclass
+        Connection conn = super.getConnection();
+
+        String sql = "INSERT INTO songs (title, albumId, artistId, additionalInfo) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, song.getSongTitle());
+            ps.setInt(2, song.getAlbumID());
+            ps.setInt(3, song.getArtistID());
+            ps.setString(4, song.getInfo());
+
+            rowsAffected = ps.executeUpdate();
+
+            // If we want to capture the generated song ID, we can retrieve it here
+            if (rowsAffected > 0) {
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        song.setSongID(generatedKeys.getInt(1));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred while adding the song.");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the superclass method
+            super.freeConnection(conn);
+        }
+        return rowsAffected > 0;
+    }
+
     private Song mapRow(ResultSet rs) throws SQLException {
         // Get the pieces of a customer from the resultset and create a new Customer
         Song s = Song.builder()
