@@ -32,20 +32,27 @@ public abstract class userDAOImpl implements userDAO {
         String sql = "SELECT * FROM users WHERE username = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
                 return new user(
                         rs.getInt("userId"),
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getString("email")
                 );
-
             }
-        } catch (SQLException E) {
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+
         }
-        return null;
+    } catch (SQLException e) {
+        System.out.println("ClassNotFoundException occurred when trying to load driver: " + e.getMessage());
+        e.printStackTrace();
     }
+         return null;
+}
 
     /**
      * Saves a new user to the database,
@@ -53,20 +60,22 @@ public abstract class userDAOImpl implements userDAO {
      * @return true if user is successfully saved, if not false.
      */
 @Override
-    public boolean save(user u) {
+public boolean save(user u) {
+    String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+    try (PreparedStatement state = connection.prepareStatement(sql)) {
 
-        String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-        try (PreparedStatement state = connection.prepareStatement(sql)) {
-            state.setString(1, u.getUser_name());
-            state.setString(2, u.getPassword());
-            state.setString(3, u.getEmail());
-            return state.executeUpdate() > 0;
-        } catch (SQLException E) {
-            E.printStackTrace();
-        }
-        return false;
+        state.setString(1, u.getUser_name());
+        state.setString(2, u.getPassword());
+        state.setString(3, u.getEmail());
+        return state.executeUpdate() > 0;
     }
+    catch (SQLException e) {
+        System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
+        System.out.println("Error: " + e.getMessage());
+        e.printStackTrace();}
+    return false;
 
+    }
 }
 
 

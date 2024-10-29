@@ -49,21 +49,17 @@ public class MusicLibraryApplication {
 	public void login() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Login to account: ");
-
-        System.out.println("Please enter your username: ");
+		System.out.println("Please enter your username: ");
 		String username = scanner.nextLine();
-
 		System.out.println("Please enter your passwords: ");
 		String password = scanner.nextLine();
-
-		 user user = userDAO.usernames(username);
-		  if (user != null && user.getPassword().equals(password)) {
+		user user = userDAO.usernames(username);
+		if (user != null && user.getPassword().equals(password)) {
 			System.out.println("Welcome " + username);
-		  }
-		  else {
-
-			  System.out.println("Invalid credentials! Please try again!");
-		  }
+		}
+		else {
+			System.out.println("Invalid credentials! Please try again!");
+		}
 	}
 
 

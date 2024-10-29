@@ -9,6 +9,10 @@ public class Artist {
 //                    artistId INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 //                    name     VARCHAR(30) NOT NULL
 //);
+    // Fields
     private int artistID;
     private String artistName;
+
+
+
 }
