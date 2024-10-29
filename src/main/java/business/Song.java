@@ -1,10 +1,17 @@
 package business;
 import lombok.*;
-@Data
-@NoArgsConstructor
+// Add getter methods
+@Getter
+// Add a toString method
+@ToString
+// Add equals and hashcode methods - only include the specifically noted variables
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+// Add the ability to build object with any components in any order
+@Builder
+// Add an all-args constructor
 @AllArgsConstructor
 
-public class Song {
+public class Song implements Comparable<Song>{
 //    CREATE TABLE songs
 //            (
 //                    songId         INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -17,11 +24,36 @@ public class Song {
 //
 //    CONSTRAINT fk_song_artist FOREIGN KEY (artistId) REFERENCES artists(artistId)
 //            );
-
+    @EqualsAndHashCode.Include
     private int songID;
-    private String songTitle;
+
+    @NonNull
     private int albumID;
+
+    @NonNull
     private int artistID;
+
+    @NonNull
+    private String songTitle;
+
+    @NonNull
     private String info;
 
+    @Override
+    public int compareTo(Song s) {
+        if (songID < s.songID) {
+            return -1;
+        } else if (songID > s.songID) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public String format() {
+        return "Song ID: " + songID +
+                "\nTitle: " + songTitle +
+                "\nAlbum ID: " + albumID +
+                "\nArtist ID: " + artistID +
+                "\nInfo: " + info;
+    }
 }
