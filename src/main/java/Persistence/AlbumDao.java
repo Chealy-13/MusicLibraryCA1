@@ -1,4 +1,4 @@
 package Persistence;
 
-public class AlbumDAO {
+public class AlbumDao {
 }

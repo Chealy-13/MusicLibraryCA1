@@ -6,9 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongDAOimpl extends MySQLDao implements SongDAO{
+public class SongDaoImpl extends MySQLDao implements SongDao {
 
-    public SongDAOimpl(String propertiesFilename) {
+    public SongDaoImpl(String propertiesFilename) {
         super(propertiesFilename);
     }
 
