@@ -28,11 +28,14 @@ public class userDAOImpl implements userDAO {
      */
     @Override
     public user usernames(String username) {
+        //This SQL query selects all fields from the 'users' table where the username matches
         String sql = "SELECT * FROM users WHERE username = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            // Sets the first parameter in the SQL query to the provided 'username'
             ps.setString(1, username);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    // Creates and returns a new 'user' object with data from the result set
                     return new user(
                             rs.getInt("userId"),
                             rs.getString("username"),
@@ -40,12 +43,14 @@ public class userDAOImpl implements userDAO {
                             rs.getString("email")
                     );
                 }
+                // Catches and prints SQL exceptions related to the inner try block (ResultSet operations)
             } catch (SQLException e) {
                 System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
                 System.out.println("Error: " + e.getMessage());
                 e.printStackTrace();
 
             }
+            // Catches and prints SQL exceptions related to the outer try block (PreparedStatement operations)
         } catch (SQLException e) {
             System.out.println("ClassNotFoundException occurred when trying to load driver: " + e.getMessage());
             e.printStackTrace();
@@ -59,10 +64,14 @@ public class userDAOImpl implements userDAO {
      */
     @Override
     public boolean save(user u) {
+        //This ine is used instert row to "users" table with values: useranme, password, email.
         String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
         try (PreparedStatement state = connection.prepareStatement(sql)) {
+            // Set the first '?' placeholder in the SQL query to the user's username
             state.setString(1, u.getUser_name());
+            // Set the second '?' placeholder in the SQL query to the user's password
             state.setString(2, u.getPassword());
+            // Set the third '?' placeholder in the SQL query to the user's email
             state.setString(3, u.getEmail());
             return state.executeUpdate() > 0;
 
@@ -71,6 +80,7 @@ public class userDAOImpl implements userDAO {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+        // Return false if fails or an exception occurs
         return false;
 
     }
@@ -82,9 +92,13 @@ public class userDAOImpl implements userDAO {
      */
     @Override
     public boolean deleteByUsername(String username) {
+        //Sql delete query is used to remove a user with specified username
         String sql = "DELETE FROM users WHERE username = ?";
+        //This line is used to stop sql injection and handle parameters safely
         try (PreparedStatement state = connection.prepareStatement(sql)) {
+        //Username provided as a method parameter will replace the '?'
         state.setString(1, username);
+        //This line runs the delete operation, it returns the number of rows affected
         int rowChoice = state.executeUpdate();
         return rowChoice > 0;
     }
