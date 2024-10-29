@@ -4,7 +4,7 @@ import business.Song;
 
 import java.util.List;
 
-public interface SongDAO {
+public interface SongDao {
     Song getBySongId(int songId);
 
     List<Song> getAllSongs();
