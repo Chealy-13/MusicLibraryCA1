@@ -157,13 +157,13 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
 
     private Song mapRow(ResultSet rs) throws SQLException {
         // Get the pieces of a customer from the resultset and create a new Customer
-        Song s = new Song(
-                rs.getInt("songId"),
-                rs.getString("title"),
-                rs.getInt("albumId"),
-                rs.getInt("artistId"),
-                rs.getString("additionalInfo")
-        );
+        Song s = Song.builder()
+                .songID(rs.getInt("songId"))
+                .songTitle(rs.getString("title"))
+                .albumID(rs.getInt("albumId"))
+                .artistID(rs.getInt("artistId"))
+                .info(rs.getString("additionalInfo"))
+                .build();
         // Return the extracted Customer (or null if the resultset was empty)
         return s;
     }
