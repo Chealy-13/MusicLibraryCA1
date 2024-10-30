@@ -1,8 +1,7 @@
 package com.example.musiclibrary;
 /**
- *
- * @author Damian
- *
+ * @author Damian Magiera
+ * D00229247
  */
 import Persistence.userDAO;
 import Persistence.userDAOImpl;
@@ -30,9 +29,10 @@ public class MusicLibraryApplication {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Shows the welcome menu for users, gives option to register or login
+     /**
+     * The method runs in an infinite loop, allowing the user to perform.
+     * actions until the application is terminated stopped.
+	 * Shows the welcome menu for users, gives option to register or login.
 	 */
 	private static void welcomeApp() {
 		MusicLibraryApplication a = new MusicLibraryApplication();
@@ -55,24 +55,36 @@ public class MusicLibraryApplication {
 			}
 		}
 	}
-
+     /**
+      * Registering a user by gathering their information and validating credit card details.
+      * The method asks the user for their username, password,
+      * email address, and credit card information. It validates the credit
+      * card details, if valid,
+      * registers the user using the {RegisterU} method. If registration is successful,a message
+      * displays; otherwise an error message is shown.
+     **/
 	public void RegisterU1() {
 		//User input to register
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Register user: ");
 
+		//Gathering user username
 		System.out.println("Please create a username:  ");
 		String username = scanner.nextLine();
 
+		//Gathering user password
 		System.out.println("Please create a password: ");
 		String password = scanner.nextLine();
 
+		//Gathering user email address
 		System.out.println("Please provide an email address: ");
 		String email = scanner.nextLine();
 
+		//Gathering user credit card number
 		System.out.print("Enter your credit card number: ");
 		String cardNum = scanner.nextLine();
 
+		//Gathering user card expiry date
 		System.out.print("Enter your expiry date (MM/YY): ");
 		String expireD = scanner.nextLine();
 
@@ -88,15 +100,22 @@ public class MusicLibraryApplication {
 				// Prints success message.
 				System.out.println("Registration successful!");
 			} else {
-				// Prints Unsuccessfully message.
+				// Prints Unsuccessful message.
 				System.out.println("Unsuccessful!, please try again!");
 			}
 		} else {
-			// Prints unsuccessfully message due to incorrect card info
+			// Prints unsuccessful message due to incorrect card info
 			System.out.println("Invalid card credentials! Please try again.");
 		}
 	}
 
+	/**
+	 * Allows a user to log in to their account by providing a username and password.
+	 * This method lets the user enter their username and password,
+	 * then checks the stored data to see if the credentials match.
+	 * If the credentials are valid, the user is welcomed and sent to
+	 * the login menu. If the credentials are wrong, an error message is displayed.
+	 */
 	public void LoginU() {
 		System.out.println("Login to account: ");
 

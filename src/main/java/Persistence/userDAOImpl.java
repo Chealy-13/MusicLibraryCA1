@@ -1,12 +1,7 @@
-/**
- * Author Damian Magiera
- * D00229247
- */
 package Persistence;
 /**
- *
- * @author Damian
- *
+ * @author Damian Magiera
+ * D00229247
  */
 import business.user;
 import java.sql.Connection;
@@ -30,7 +25,7 @@ public class userDAOImpl implements userDAO {
     private final Connection connection;
 
     /**
-     * @param cardNumber the credit card number has to be exactly 16 digits with no spaces or lines.
+     * @param cardNumber the credit card number has to be exactly 16 digits.
      * @param expireD    the expiry date in a MM/YY format, from (01-12) and YY is the last two numbers of a year.
      * @param cvv1       a 3 or 4 digit security code.
      * @return {true} if all three pieces of information match the expected format. {false} otherwise
@@ -52,8 +47,11 @@ public class userDAOImpl implements userDAO {
 
     /**
      * Registers a new user by inserting their username, password, and email into the "users" table.
+     * Excecutes an SL INSERT to add a new record to the "users"table
      *
      * @param username the username of the new user, must be unique in the database.
+     * @param password the password of the new user to be registered.
+     * @param email the email of the new user to be registered.
      * @return {true} if the user was successfully registered,{false} if the insertion failed or an exception occurred.
      * @throws SQLException if a database access error occurs, or the SQL statement is invalid.
      */
@@ -79,13 +77,18 @@ public class userDAOImpl implements userDAO {
         }
         // Return false if fails or an exception occurs
         return false;
-
     }
-
     /**
-     * Collects a user from the database by username,
      *
+     * Collects a user from the database by username.
+     * The method gets the SQL query to select all fields from the 'users' table,
+     * where it matches the username. If a match is found,
+     * a User object is created and returned with the user's information. If no
+     * users are found, or if an exception occurs the method will return null.
+     *
+     * @param username the username of the user to be retrieved from the database.
      * @return a User object if found, or if no matching user is found.
+     * @throws SQLException if there is an error executing the SQL statement or retrieving the results.
      */
     @Override
     public user LoginU(String username) {
@@ -122,7 +125,9 @@ public class userDAOImpl implements userDAO {
 
     /**
      * Deletes user based on username from database
-     *
+     * This method executes an SQL DELETE statement to remove a user from the
+     * 'users' table.
+     * If the deletion is successful, it returns true; otherwise, it returns false.
      * @param username of user will be deleted
      * @return true if the user was successfully deleted, false otherwise or if an error occurred
      */
