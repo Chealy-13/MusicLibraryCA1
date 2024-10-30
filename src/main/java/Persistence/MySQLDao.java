@@ -5,6 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+/**
+ *
+ * @author Chris
+ *
+ */
 public class MySQLDao {
     private Properties properties;
     private Connection conn = null;

@@ -1,5 +1,9 @@
 package Persistence;
-
+/**
+ *
+ * @author Damian
+ *
+ */
 import business.user;
 
 import java.util.List;

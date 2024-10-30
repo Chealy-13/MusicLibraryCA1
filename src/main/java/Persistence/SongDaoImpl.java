@@ -5,7 +5,11 @@ import business.Song;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *
+ * @author Chris
+ *
+ */
 public class SongDaoImpl extends MySQLDao implements SongDao {
 
     /**

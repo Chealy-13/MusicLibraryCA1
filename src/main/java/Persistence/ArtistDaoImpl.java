@@ -1,5 +1,9 @@
 package Persistence;
-
+/**
+ *
+ * @author Chris
+ *
+ */
 import business.Artist;
 
 import java.sql.Connection;
