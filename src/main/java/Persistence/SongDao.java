@@ -5,11 +5,11 @@ import business.Song;
 import java.util.List;
 
 public interface SongDao {
-    Song getBySongId(int songId);
+    Song getSongBySongId(int songId);
 
     List<Song> getAllSongs();
 
-    Song getByArtistId(int artistId);
+    Song getSongByArtistId(int artistId);
 
     boolean deleteBySongId(int songId);
 
