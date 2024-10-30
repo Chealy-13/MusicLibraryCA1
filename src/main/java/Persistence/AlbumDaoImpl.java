@@ -34,7 +34,7 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
                 // Extract the information from the result set
                 // Use extraction method to avoid code repetition!
                 if (rs.next()) {
-                    album = mapAlbum(rs);
+                    album = mapRow(rs);
                     album.setSongs(getSongsForAlbum(albumId));
                 }
             } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
                 // Extract the information from the result set
                 // Use extraction method to avoid code repetition!
                 if (rs.next()) {
-                    Album album = mapAlbum(rs);
+                    Album album = mapRow(rs);
                     album.setSongs(getSongsForAlbum(album.getAlbumId()));
                     albums.add(album);
                 }
@@ -124,7 +124,7 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
         return songs;
     }
 
-    private Album mapAlbum(ResultSet rs) throws SQLException {
+    private Album mapRow(ResultSet rs) throws SQLException {
         return Album.builder()
                 .albumId(rs.getInt("albumId"))
                 .albumTitle(rs.getString("albumTitle"))
