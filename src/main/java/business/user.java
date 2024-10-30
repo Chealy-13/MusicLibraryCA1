@@ -7,7 +7,11 @@ package business;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ *
+ * @author Damian
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

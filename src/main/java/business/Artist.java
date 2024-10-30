@@ -1,5 +1,10 @@
 package business;
 import lombok.*;
+/**
+ *
+ * @author Chris
+ *
+ */
 @Getter
 // Add setter methds
 @Setter
@@ -17,10 +22,8 @@ public class Artist {
 //                    artistId INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 //                    name     VARCHAR(30) NOT NULL
 //);
-    // Fields
+// Fields
     private int artistID;
     private String artistName;
-
-
 
 }

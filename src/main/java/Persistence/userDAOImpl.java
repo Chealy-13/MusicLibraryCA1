@@ -3,7 +3,11 @@
  * D00229247
  */
 package Persistence;
-
+/**
+ *
+ * @author Damian
+ *
+ */
 import business.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

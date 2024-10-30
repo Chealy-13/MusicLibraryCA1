@@ -3,7 +3,11 @@
  * D00229247
  */
 package Persistence;
-
+/**
+ *
+ * @author Damian
+ *
+ */
 import business.user;
 
 import java.util.List;

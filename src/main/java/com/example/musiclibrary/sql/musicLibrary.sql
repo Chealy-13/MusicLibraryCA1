@@ -1,3 +1,8 @@
+/**
+ *
+ * @author Damian
+ *
+ */
 DROP DATABASE IF EXISTS musiclibary;
 CREATE DATABASE IF NOT EXISTS musiclibary;
 
