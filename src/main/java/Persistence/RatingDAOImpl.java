@@ -1,8 +1,13 @@
 package Persistence;
 
+import business.Rating;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RatingDAOImpl implements RatingDAO {
     private Connection connection;
@@ -36,5 +41,28 @@ public class RatingDAOImpl implements RatingDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<RatingDAO> getRatingsByUser(int userId_) throws SQLException {
+        String sql = "SELECT songId, userId, rating FROM Rating WHERE userId = ?";
+
+        List<Rating> ratings = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId_);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ratings.add(new Rating(
+                            rs.getInt("songID"),
+                            rs.getInt("userID"),
+                            rs.getInt("rating")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 }
