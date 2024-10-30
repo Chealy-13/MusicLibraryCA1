@@ -6,9 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongDAOimpl extends MySQLDao implements SongDAO{
+public class SongDaoImpl extends MySQLDao implements SongDao {
 
-    public SongDAOimpl(String propertiesFilename) {
+    public SongDaoImpl(String propertiesFilename) {
         super(propertiesFilename);
     }
 
@@ -162,7 +162,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
         // Get a connection using the superclass
         Connection conn = super.getConnection();
 
-        String sql = "INSERT INTO songs (title, albumId, artistId, additionalInfo) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, song.getSongTitle());
@@ -195,7 +195,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
         // Get the pieces of a customer from the resultset and create a new Customer
         Song s = Song.builder()
                 .songID(rs.getInt("songId"))
-                .songTitle(rs.getString("title"))
+                .songTitle(rs.getString("songTitle"))
                 .albumID(rs.getInt("albumId"))
                 .artistID(rs.getInt("artistId"))
                 .info(rs.getString("additionalInfo"))
