@@ -163,6 +163,10 @@ public class MusicLibraryApplication {
 			}
 		}
 	}
+	/**
+	 * This method displays a message showing that the user has successfully
+	 * logged out from the system.
+	 */
 			public void logout() {
 				//Message displayed when logged out
 				System.out.println("You have successfully logged out.");
