@@ -11,7 +11,11 @@ public interface SongDao {
 
     List<Song> getAllSongs();
 
-    Song getSongByArtistId(int artistId);
+//    Song getSongByArtistId(int artistId);
+
+    List<Song> getSongsByArtistId(int artistId);
+
+    List<Song> getSongsByAlbumId(int albumId);
 
     boolean deleteBySongId(int songId);
 
