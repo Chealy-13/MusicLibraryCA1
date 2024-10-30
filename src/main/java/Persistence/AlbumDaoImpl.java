@@ -16,6 +16,16 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
         super(propertiesFilename);
     }
 
+    /**
+     * Retrieves an Album object by its unique album ID, including the songs belonging to the album.
+     * it uses a parameterized SQL query to find an album record in the database
+     * matching the specified album ID. It extracts the album information and any related
+     * songs for the album, returning a fully populated Album object.
+     * @param albumId the unique id of the album to retrieve.
+     * @return an Album object populated with the album's details and associated songs,
+     * or null if no album is found for the given ID.
+     * @throws SQLException if a database access error occurs or the SQL execution fails.
+     */
     @Override
     public Album getByAlbumId(int albumId) {
         Album album = null;
@@ -53,6 +63,15 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
         return album;
     }
 
+    /**
+     * Retrieves a list of Album objects associated with a specific artist ID.
+     * it uses a parameterized SQL query to locate all album records
+     * linked to the provided artist ID. For each album retrieved, it populates
+     * the album's song list by retrieving songs that belong to that album.
+     * @param artistId the unique id of the artist whose albums are to be retrieved.
+     * @return a List of Album objects with each album's details and associated songs.
+     * Returns an empty list if the artist has no albums or the ID does not exist.
+     */
     @Override
     public List<Album> getAlbumsByArtistId(int artistId) {
         List<Album> albums = new ArrayList<>();
@@ -91,6 +110,17 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
         return albums;
     }
 
+    /**
+     * Retrieves a list of Song objects associated with a specific album ID.
+     * It executes a parameterized SQL query to fetch all song records
+     * linked to the provided album ID. It constructs and returns a list of
+     * Song objects populated with details from the result set.
+     * @param albumId the unique id of the album for which songs are to be retrieved.
+     * @return a List of Song objects containing the details of songs
+     * associated with the specified album. Returns an empty list if no songs
+     * are found for the given album ID.
+     * @throws SQLException if a database access error occurs or the SQL statement is invalid.
+     */
     private List<Song> getSongsForAlbum(int albumId) throws SQLException {
         List<Song> songs = new ArrayList<>();
         Connection conn = super.getConnection();
@@ -124,6 +154,17 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
         return songs;
     }
 
+    /**
+     * Maps a row from a ResultSet to an Album object.
+     * It extracts data from the provided ResultSet and
+     * constructs a new Album instance using the extracted values.
+     * @param rs the ResultSet containing the current row of data
+     * to be mapped to an Album object.
+     * @return an Album object populated with the values from the current
+     * row of the ResultSet.
+     * @throws SQLException if a database access error occurs or if there is an
+     * issue retrieving data from the ResultSet.
+     */
     private Album mapRow(ResultSet rs) throws SQLException {
         return Album.builder()
                 .albumId(rs.getInt("albumId"))
