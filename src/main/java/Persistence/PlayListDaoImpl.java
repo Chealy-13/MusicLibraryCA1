@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of the PlayListDAO interface
@@ -26,10 +28,10 @@ public abstract class PlayListDaoImpl  implements PlayListDao{
     }
 
 
-
     /**
-     * Constructs a UserDAOImpl with the specified database connection.
-     * @param conn is the Connection object to connect to the database.
+     * Method to retrieve a playlist from db by it id.
+     * @param id: Id of row/obj/playlist to return from db.
+     * @return: Return an obj/playlist.
      */
     @Override
     public PlayList getPlayListById(int id) {
@@ -58,6 +60,12 @@ public abstract class PlayListDaoImpl  implements PlayListDao{
         }
         return null;
     }
+
+    /**
+     * Method to delete a playlist from a database
+     * @param id: The id of the playlist to be deleted from db
+     * @return: A boolean, True if rowAffect/deteted OR False if nothing was deleted
+     */
     @Override
     public boolean deletePlayListById(int id) {
         int rowsAffected = 0;
@@ -88,5 +96,12 @@ public abstract class PlayListDaoImpl  implements PlayListDao{
         } else {
             return false;
         }
+    }
+    @Override
+    public List<Song> getAllSongsOnPlayList(){
+        List<Song> favouriteSongs = new ArrayList<>();
+
+        return favouriteSongs;
+
     }
 }
