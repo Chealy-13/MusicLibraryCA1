@@ -53,6 +53,44 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
         return album;
     }
 
+    @Override
+    public List<Album> getAlbumsByArtistId(int artistId) {
+        List<Album> albums = new ArrayList<>();
+
+        // Get a connection using the superclass
+        Connection conn = super.getConnection();
+        // TRY to get a statement from the connection
+        // When you are parameterizing the query, remember that you need
+        // to use the ? notation (so you can fill in the blanks later)
+        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM albums where artistId = ?")) {
+
+            // Fill in the blanks, i.e. parameterize the query
+            ps.setInt(1, artistId);
+            // TRY to execute the query
+            try (ResultSet rs = ps.executeQuery()) {
+                // Extract the information from the result set
+                // Use extraction method to avoid code repetition!
+                if (rs.next()) {
+                    Album album = mapAlbum(rs);
+                    album.setSongs(getSongsForAlbum(album.getAlbumId()));
+                    albums.add(album);
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL Exception occurred when executing SQL or processing results.");
+                System.out.println("Error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the connection using the superclass method
+            super.freeConnection(conn);
+        }
+        return albums;
+    }
+
     private List<Song> getSongsForAlbum(int albumId) throws SQLException {
         List<Song> songs = new ArrayList<>();
         Connection conn = super.getConnection();
@@ -61,12 +99,11 @@ public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
             ps.setInt(1, albumId);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    int songId = rs.getInt("songId");                // Ensure songId is an int
-                    String songTitle = rs.getString("songTitle");     // Ensure title is a String
-                    int artistId = rs.getInt("artistId");             // Ensure artistId is an int
-                    String additionalInfo = rs.getString("additionalInfo"); // Ensure additionalInfo is a String
+                    int songId = rs.getInt("songId");
+                    String songTitle = rs.getString("songTitle");
+                    int artistId = rs.getInt("artistId");
+                    String additionalInfo = rs.getString("additionalInfo");
 
-                    // Construct the Song object
                     Song song = new Song(songId, songTitle, albumId, artistId, additionalInfo);
                     songs.add(song);
                 }
