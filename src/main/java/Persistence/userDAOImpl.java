@@ -12,8 +12,17 @@ import java.sql.SQLException;
  * to manage user records in database.
  */
 public class userDAOImpl implements userDAO {
+
+    private static final String cardNumber = "^(\\d{16})$";
+    private static final String expireDate = "^(0[1-9]|1[0-2])/\\d{2}$"; // MM/YY
+    private static final String cvv = "^\\d{3,4}$";
     private final Connection connection;
 
+    public boolean validateCCInfo(String cardNumber, String expiryDate, String cvv) {
+        return cardNumber.matches(cardNumber) &&
+                expiryDate.matches(expireDate) &&
+                cvv.matches(cvv);
+    }
     /**
      * Constructs a UserDAOImpl with the specified database connection.
      * @param con is the Connection object to connect to the database.
@@ -23,11 +32,43 @@ public class userDAOImpl implements userDAO {
     }
 
     /**
+     * Registers a new user by inserting their username, password, and email into the "users" table.
+     *
+     * @param username the username of the new user, must be unique in the database
+     * @return {@code true} if the user was successfully registered (i.e., one row was affected);
+     *         {@code false} if the insertion failed or an exception occurred
+     * @throws SQLException if a database access error occurs, or the SQL statement is invalid
+     */
+
+    @Override
+    public boolean RegisterU(String username, String password, String email) {
+        //This ine is used instert row to "users" table with values: useranme, password, email.
+        String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+        try (PreparedStatement state = connection.prepareStatement(sql)) {
+            // Set the first '?' placeholder in the SQL query to the user's username
+            state.setString(1, username);
+            // Set the second '?' placeholder in the SQL query to the user's password
+            state.setString(2, password);
+            // Set the third '?' placeholder in the SQL query to the user's email
+            state.setString(3, email);
+
+            return state.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        // Return false if fails or an exception occurs
+        return false;
+
+    }
+    /**
      * Collects a user from the database by username,
      * @return a User object if found, or if no matching user is found.
      */
     @Override
-    public user usernames(String username) {
+    public user LoginU(String username) {
         //This SQL query selects all fields from the 'users' table where the username matches
         String sql = "SELECT * FROM users WHERE username = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -41,6 +82,7 @@ public class userDAOImpl implements userDAO {
                             rs.getString("username"),
                             rs.getString("password"),
                             rs.getString("email")
+
                     );
                 }
                 // Catches and prints SQL exceptions related to the inner try block (ResultSet operations)
@@ -57,39 +99,13 @@ public class userDAOImpl implements userDAO {
         }
         return null;
     }
-    /**
-     * Saves a new user to the database,
-     * @param u User object is saved.
-     * @return true if user is successfully saved, if not false.
-     */
-    @Override
-    public boolean save(user u) {
-        //This ine is used instert row to "users" table with values: useranme, password, email.
-        String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-        try (PreparedStatement state = connection.prepareStatement(sql)) {
-            // Set the first '?' placeholder in the SQL query to the user's username
-            state.setString(1, u.getUser_name());
-            // Set the second '?' placeholder in the SQL query to the user's password
-            state.setString(2, u.getPassword());
-            // Set the third '?' placeholder in the SQL query to the user's email
-            state.setString(3, u.getEmail());
-            return state.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
-        }
-        // Return false if fails or an exception occurs
-        return false;
-
-    }
 
     /**
      * Deletes user based on username from database
      * @param username of user will be deleted
      * @return true if the user was successfully deleted, false otherwise or if an error occurred
      */
+
     @Override
     public boolean deleteByUsername(String username) {
         //Sql delete query is used to remove a user with specified username
