@@ -1,5 +1,9 @@
 package Persistence;
-
+/**
+ *
+ * @author Chris
+ *
+ */
 import business.Album;
 
 import java.util.List;

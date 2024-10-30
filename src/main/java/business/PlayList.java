@@ -1,5 +1,9 @@
 package business;
-
+/**
+ *
+ * @author Julie
+ *
+ */
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
