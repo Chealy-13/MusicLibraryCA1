@@ -1,8 +1,16 @@
 package business;
 import lombok.*;
-@Data
+@Getter
+// Add setter methds
+@Setter
+// Add a toString method
+@ToString
+// Add equals and hashcode methods - only include the specifically noted variables
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+// Add the ability to build object with any components in any order
+@Builder
+// Add an all-args constructor
 @AllArgsConstructor
-@NoArgsConstructor
 public class Artist {
 //    CREATE TABLE artists
 //            (
