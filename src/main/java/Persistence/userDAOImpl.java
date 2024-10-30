@@ -1,11 +1,12 @@
 package Persistence;
 
 import business.user;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of the UserDAO interface
@@ -14,25 +15,27 @@ import java.sql.SQLException;
 public class userDAOImpl implements userDAO {
     /**
      * Validates information by checking the format of the details.
-     * */
+     */
     private static final String cardNum = "^(\\d{16})$";
     private static final String expireDate = "^(0[1-9]|1[0-2])/\\d{2}$"; // MM/YY
     private static final String cvv = "^\\d{3,4}$";
     private final Connection connection;
 
     /**
-     *@param cardNumber the credit card number has to be exactly 16 digits with no spaces or lines.
-    * @param expireD the expiry date in a MM/YY format, from (01-12) and YY is the last two numbers of a year.
-    * @param cvv1 a 3 or 4 digit security code.
-    * @return {true} if all three pieces of information match the expected format. {false} otherwise
+     * @param cardNumber the credit card number has to be exactly 16 digits with no spaces or lines.
+     * @param expireD    the expiry date in a MM/YY format, from (01-12) and YY is the last two numbers of a year.
+     * @param cvv1       a 3 or 4 digit security code.
+     * @return {true} if all three pieces of information match the expected format. {false} otherwise
      */
     public boolean validateCCInfo(String cardNumber, String expireD, String cvv1) {
         return cardNumber.matches(cardNum) &&
                 expireD.matches(expireDate) &&
                 cvv1.matches(cvv);
     }
+
     /**
      * Constructs a UserDAOImpl with the specified database connection.
+     *
      * @param con is the Connection object to connect to the database.
      */
     public userDAOImpl(Connection con) {
@@ -70,8 +73,10 @@ public class userDAOImpl implements userDAO {
         return false;
 
     }
+
     /**
      * Collects a user from the database by username,
+     *
      * @return a User object if found, or if no matching user is found.
      */
     @Override
@@ -109,6 +114,7 @@ public class userDAOImpl implements userDAO {
 
     /**
      * Deletes user based on username from database
+     *
      * @param username of user will be deleted
      * @return true if the user was successfully deleted, false otherwise or if an error occurred
      */
@@ -119,18 +125,53 @@ public class userDAOImpl implements userDAO {
         String sql = "DELETE FROM users WHERE username = ?";
         //This line is used to stop sql injection and handle parameters safely
         try (PreparedStatement state = connection.prepareStatement(sql)) {
-        //Username provided as a method parameter will replace the '?'
-        state.setString(1, username);
-        //This line runs the delete operation, it returns the number of rows affected
-        int rowChoice = state.executeUpdate();
-        return rowChoice > 0;
-    }
-        catch(SQLException E){
-        System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
-        System.out.println("Error: " + E.getMessage());
-        E.printStackTrace();
-    }
+            //Username provided as a method parameter will replace the '?'
+            state.setString(1, username);
+            //This line runs the delete operation, it returns the number of rows affected
+            int rowChoice = state.executeUpdate();
+            return rowChoice > 0;
+        } catch (SQLException E) {
+            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution.");
+            System.out.println("Error: " + E.getMessage());
+            E.printStackTrace();
+        }
         return false;
-}
-}
 
+    }
+}
+    /**
+     * Collects all users from the 'users' table in the database.
+     * The resulting list of users,
+     * If no users are found, an empty list is returned.
+     *
+     * @return a List of {user} objects representing all users in the database.
+     *         Returns nothing if list is empty.
+     */
+   // public List<user> getAllUsers() {
+     //   // Creates a new Arraylist ro store objects
+       // List<user> users = new ArrayList<>();
+        //String sql = "SELECT * FROM users";
+        //try (PreparedStatement statement = connection.prepareStatement(sql)) {
+          //  try (ResultSet rs = statement.executeQuery()) {
+            //    while (rs.next()) {
+              //      user user = new user(
+                //            rs.getInt("userId"),
+                  //          rs.getString("username"),
+                    //        rs.getString("password"),
+                      //      rs.getString("email")
+                    //);
+                    //users.add(user);
+              //  }
+            //} catch (SQLException e) {
+                //System.out.println("SQL Exception occurred when executing SQL or processing results.");
+                //System.out.println("Error: " + e.getMessage());
+                //e.printStackTrace();
+          //  }
+        //} catch (SQLException e) {
+          //  System.out.println("SQL Exception occurred when attempting to prepare SQL for execution");
+            //System.out.println("Error: " + e.getMessage());
+            //e.printStackTrace();
+        //}
+            //return users;
+     //   }
+    //}
