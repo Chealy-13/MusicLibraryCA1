@@ -133,14 +133,19 @@ public class MusicLibraryApplication {
 			System.out.print("Choose an option: ");
 			//Reads user input
 			int choice = scanner.nextInt();
-             //User choice
+			//User choice
 			switch (choice) {
 				case 1:
-					break;
+					logout();
+					return;
 				default:
 					//Notifies the user if invalid choice
 					System.out.println("Invalid choice!");
 			}
 		}
 	}
-}
+			public void logout() {
+				//Message displayed when logged out
+				System.out.println("You have successfully logged out.");
+			}
+	}
