@@ -46,6 +46,12 @@ public class Song implements Comparable<Song>{
     public Song(int songId, String songTitle, int albumId, int artistId, String additionalInfo) {
     }
 
+    /**
+     * Compares this song with another song based on the song ID.
+     * @param s the song to be compared.
+     * @return a negative integer, zero, or a positive integer as this song
+     * is less than, equal to, or greater than the specified song.
+     */
     @Override
     public int compareTo(Song s) {
         if (songID < s.songID) {
@@ -56,6 +62,11 @@ public class Song implements Comparable<Song>{
         return 0;
     }
 
+    /**
+     * Returns a formatted string representation of the song.
+     * Each piece of information is displayed on a new line for better readability.
+     * @return a string representation of the song.
+     */
     public String format() {
         return "Song ID: " + songID +
                 "\nSong Title: " + songTitle +
