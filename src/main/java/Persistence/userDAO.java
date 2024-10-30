@@ -1,3 +1,7 @@
+/**
+ * Author Damian Magiera
+ * D00229247
+ */
 package Persistence;
 
 import business.user;

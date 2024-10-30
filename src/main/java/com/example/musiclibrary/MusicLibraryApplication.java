@@ -13,7 +13,7 @@ public class MusicLibraryApplication {
 	private static final String password = "";
 	private static userDAOImpl userDAO;
 	private static final Scanner scanner = new Scanner(System.in);
-
+	boolean loggIn = true;
 
 	public static void main(String[] args) {
 
@@ -37,9 +37,6 @@ public class MusicLibraryApplication {
 			//User can select options
 			System.out.println("1. Register: ");
 			System.out.println("2. Login: ");
-			System.out.println("3. ");
-			System.out.println("4. ");
-			System.out.println("5. ");
 
 			int choice1 = scanner.nextInt();
 			scanner.nextLine();
@@ -56,7 +53,7 @@ public class MusicLibraryApplication {
 	}
 
 	public void RegisterU1() {
-	//User input to register
+		//User input to register
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Register user: ");
 
@@ -76,7 +73,7 @@ public class MusicLibraryApplication {
 		String expireD = scanner.nextLine();
 
 		System.out.print("Enter your CVV: ");
-    // Read the CVV from the user
+		// Read the CVV from the user
 		String cvv1 = scanner.nextLine();
 		// Validate the give credit card info
 		// using the validateCCInfo method in the userDAO object.
@@ -103,18 +100,43 @@ public class MusicLibraryApplication {
 		String username = scanner.nextLine();
 
 		System.out.println("Please enter your passwords: ");
-        //Reads users password
+		//Reads users password
 		String password = scanner.nextLine();
-        // looking for the user object from the database usings its username
-        // by calling the LoginU method from the userDAO object
+		// looking for the user object from the database usings its username
+		// by calling the LoginU method from the userDAO object
 		user user = userDAO.LoginU(username);
 		// Checks if user was found (user is not null)
-        // then checks it the password matches, the password that was stored in user object
+		// then checks it the password matches, the password that was stored in user object
 		if (user != null && user.getPassword().equals(password)) {
 			System.out.println("Welcome " + username);
+			LogInMenu();
 		} else {
 			System.out.println("Invalid credentials! Please try again!");
 		}
 	}
 
+	/**
+	 * This method is where the user will be sent after login in successfully.
+	 * The menu will give an option to logout.
+	 */
+	public void LogInMenu() {
+		//Reads input from the console
+		Scanner scanner = new Scanner(System.in);
+		while (loggIn) {
+			//Login menu options
+			System.out.println("Login Menu");
+			System.out.println("1. Logout");
+			System.out.print("Choose an option: ");
+			//Reads user input
+			int choice = scanner.nextInt();
+             //User choice
+			switch (choice) {
+				case 1:
+					break;
+				default:
+					//Notifies the user if invalid choice
+					System.out.println("Invalid choice!");
+			}
+		}
+	}
 }

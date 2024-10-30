@@ -1,3 +1,8 @@
+/**
+ * Author Damian Magiera
+ * D00229247
+ */
+
 package business;
 import lombok.AllArgsConstructor;
 import lombok.Data;
