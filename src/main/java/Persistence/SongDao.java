@@ -7,6 +7,8 @@ import java.util.List;
 public interface SongDao {
     Song getSongBySongId(int songId);
 
+    List<Song> getSongsBySongTitle(String songTitle);
+
     List<Song> getAllSongs();
 
     Song getSongByArtistId(int artistId);
