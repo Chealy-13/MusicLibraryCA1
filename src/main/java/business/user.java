@@ -3,13 +3,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 /**
- *
- * @author Damian
- *
+ * @author Damian Magiera
+ * D00229247
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 
 public class user
 {

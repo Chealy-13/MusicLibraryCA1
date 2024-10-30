@@ -19,10 +19,8 @@ public class MySQLDao {
      * This constructor initializes the data access object by accepting an active database
      * connection. The provided connection will be used for executing SQL queries and
      * managing transactions.
-     * @param conn the Connection object representing the active database connection
-     * to be used by this DAO for data operations.
      */
-    public MySQLDao(Connection conn){
+    public MySQLDao(){
         this.conn = conn;
     }
 

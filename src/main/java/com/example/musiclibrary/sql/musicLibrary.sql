@@ -83,7 +83,7 @@ INSERT INTO album (albumTitle, artistId, releaseDate) VALUES ('Parachutes', 5, '
 INSERT INTO album (albumTitle, artistId, releaseDate) VALUES ('Starboy', 6, '2016-04-01');
 INSERT INTO album (albumTitle, artistId, releaseDate) VALUES ('After Hours', 6, '2020-04-01');
 
---Songs from + Ed Sheeran
+# --Songs from + Ed Sheeran
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('The A Team', 1, 1, '+');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Drunk', 1, 1, '+');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Lego House', 1, 1, '+');
@@ -97,7 +97,7 @@ INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Sunbur
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('The A Team (Acoustic)', 1, 1, '+');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Give Me Love', 1, 1, '+');
 
---Songs from x Ed Sheeran
+# --Songs from x Ed Sheeran
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('One', 2, 1, 'x');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('I\'m a Mess', 2, 1, 'x');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Sing', 2, 1, 'x');
@@ -114,42 +114,53 @@ INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Even M
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Shirtsleeves', 2, 1, 'x');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('I See Fire', 2, 1, 'x');
 
---Songs from Abbey Road the beatles
+# --Songs from Abbey Road the beatles
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Come Together', 4, 2, 'Abbey Road');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Something', 4, 2, 'Abbey Road');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Here Comes The Sun', 4, 2, 'Abbey Road');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Golden Slumbers', 4, 2, 'Abbey Road');
 
---Songs from Red Taylor swift
+# --Songs from Red Taylor swift
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Red', 5, 3, 'Red');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('I Knew You Were Trouble.', 5, 3, 'Red');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('22', 5, 3, 'Red');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('All Too Well', 5, 3, 'Red');
 
---Songs from Midnights Taylor swift
+# --Songs from Midnights Taylor swift
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Anti-Hero', 6, 3, 'Midnights');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Karma', 6, 3, 'Midnights');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Midnight Rain', 6, 3, 'Midnights');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Lavender Haze', 6, 3, 'Midnights');
 
---Songs from Take Care Drake
+# --Songs from Take Care Drake
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Headlines', 7, 4, 'Take Care');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Take Care', 7, 4, 'Take Care');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('HYFR', 7, 4, 'Take Care');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('The Motto', 7, 4, 'Take Care');
 
---Songs from Views Drake
+# --Songs from Views Drake
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Controlla', 8, 4, 'Views');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('One Dance', 8, 4, 'Views');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Too Good', 8, 4, 'Views');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Hotline Bling', 8, 4, 'Views');
 
 
---A Rush of Blood to the Head
+# --A Rush of Blood to the Head
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Clocks', 9, 5, 'A Rush of Blood to the Head');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('The Scientist', 9, 5, 'A Rush of Blood to the Head');
 
---Songs from Parachutes Coldplay
+# --Songs from Parachutes Coldplay
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Sparks', 10, 5, 'Parachutes');
 INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES ('Yellow', 10, 5, 'Parachutes');
 
+
+CREATE TABLE Rating (
+    ratingId INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT NOT NULL,
+    songId INT NOT NULL,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+
+FOREIGN KEY (userId ) REFERENCES Users(userId )
+
+
+);
