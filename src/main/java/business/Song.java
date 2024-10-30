@@ -41,6 +41,11 @@ public class Song implements Comparable<Song>{
     @NonNull
     private String info;
 
+    //AlbumDaoImpl getSongsForAlbum method not recognising songtitle or albumids type
+    // so had to generate constructor
+    public Song(int songId, String songTitle, int albumId, int artistId, String additionalInfo) {
+    }
+
     @Override
     public int compareTo(Song s) {
         if (songID < s.songID) {
@@ -53,7 +58,7 @@ public class Song implements Comparable<Song>{
 
     public String format() {
         return "Song ID: " + songID +
-                "\nTitle: " + songTitle +
+                "\nSong Title: " + songTitle +
                 "\nAlbum ID: " + albumID +
                 "\nArtist ID: " + artistID +
                 "\nInfo: " + info;

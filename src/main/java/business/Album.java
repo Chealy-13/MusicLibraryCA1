@@ -1,15 +1,25 @@
 package business;
 
 import java.util.Date;
+import java.util.List;
+
 import lombok.*;
-@Data
-@NoArgsConstructor
+@Getter
+// Add setter methds
+@Setter
+// Add a toString method
+@ToString
+// Add equals and hashcode methods - only include the specifically noted variables
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+// Add the ability to build object with any components in any order
+@Builder
+// Add an all-args constructor
 @AllArgsConstructor
 public class Album {
 //    CREATE TABLE album
 //            (
 //                    albumId      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//                    title        VARCHAR(50)  NOT NULL,
+//                    albumTitle        VARCHAR(50)  NOT NULL,
 //    artistId     INT UNSIGNED NOT NULL,
 //    releaseDate  DATE         NOT NULL,
 //    ratingOfSongs INT UNSIGNED NOT NULL,
@@ -17,9 +27,12 @@ public class Album {
 //    CONSTRAINT album_artist_fk FOREIGN KEY (artistId) REFERENCES artists(artistId)
 //            );
 
-    private int albumID;
+    @EqualsAndHashCode.Include
+    private int albumId;
+    @NonNull
     private String albumTitle;
-    private int artistID;
-    private Date releaseDate;
-    private int rating;
+    private int artistId;
+    private int releaseYear;
+
+    private List<Song> songs;
 }

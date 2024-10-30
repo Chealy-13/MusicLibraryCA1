@@ -21,7 +21,7 @@ CREATE TABLE artists
 CREATE TABLE album
 (
     albumId      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title        VARCHAR(50)  NOT NULL,
+    albumTitle        VARCHAR(50)  NOT NULL,
     artistId     INT UNSIGNED NOT NULL,
     releaseDate  DATE         NOT NULL,
     ratingOfSongs INT UNSIGNED NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE album
 CREATE TABLE songs
 (
     songId         INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title          VARCHAR(50)  NOT NULL,
+    songTitle          VARCHAR(50)  NOT NULL,
     albumId        INT UNSIGNED,
     artistId       INT UNSIGNED,
     additionalInfo VARCHAR(100),

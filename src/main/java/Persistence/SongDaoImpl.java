@@ -6,9 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongDAOimpl extends MySQLDao implements SongDAO{
+public class SongDaoImpl extends MySQLDao implements SongDao {
 
-    public SongDAOimpl(String propertiesFilename) {
+    public SongDaoImpl(String propertiesFilename) {
         super(propertiesFilename);
     }
 
@@ -21,7 +21,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
 //    }
 
     @Override
-    public Song getBySongId(int songId) {
+    public Song getSongBySongId(int songId) {
         Song song = null;
 
         // Get a connection using the superclass
@@ -54,6 +54,42 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
             super.freeConnection(conn);
         }
         return song;
+    }
+
+    @Override
+    public List<Song> getSongsBySongTitle(String songTitle) {
+        List<Song> songs = new ArrayList<>();
+
+        // Get a connection using the superclass
+        Connection conn = super.getConnection();
+        // TRY to get a statement from the connection
+        // When you are parameterizing the query, remember that you need
+        // to use the ? notation (so you can fill in the blanks later)
+        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM songs WHERE LOWER(songTitle) LIKE LOWER(?)")) {
+
+            // Fill in the blanks, i.e. parameterize the query
+            ps.setString(1, "%" + songTitle + "%");
+            // TRY to execute the query
+            try (ResultSet rs = ps.executeQuery()) {
+                // Extract the information from the result set
+                // Use extraction method to avoid code repetition!
+                if(rs.next()) {
+                    songs.add(mapRow(rs));
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL Exception occurred when executing SQL or processing results.");
+                System.out.println("Error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the connection using the superclass method
+            super.freeConnection(conn);
+        }
+        return songs;
     }
 
 
@@ -91,15 +127,15 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
     }
 
     @Override
-    public Song getByArtistId(int artistId) {
-        Song song = null;
+    public List<Song> getSongsByArtistId(int artistId) {
+        List<Song> songs = new ArrayList<>();
 
         // Get a connection using the superclass
         Connection conn = super.getConnection();
         // TRY to get a statement from the connection
         // When you are parameterizing the query, remember that you need
         // to use the ? notation (so you can fill in the blanks later)
-        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM songs where artistId = ?")) {
+        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM songs WHERE artistId = ?")) {
 
             // Fill in the blanks, i.e. parameterize the query
             ps.setInt(1, artistId);
@@ -108,7 +144,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
                 // Extract the information from the result set
                 // Use extraction method to avoid code repetition!
                 if(rs.next()) {
-                    song = mapRow(rs);
+                    songs.add(mapRow(rs));
                 }
             } catch (SQLException e) {
                 System.out.println("SQL Exception occurred when executing SQL or processing results.");
@@ -123,7 +159,43 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
             // Close the connection using the superclass method
             super.freeConnection(conn);
         }
-        return song;
+        return songs;
+    }
+
+    @Override
+    public List<Song> getSongsByAlbumId(int albumId) {
+        List<Song> songs = new ArrayList<>();
+
+        // Get a connection using the superclass
+        Connection conn = super.getConnection();
+        // TRY to get a statement from the connection
+        // When you are parameterizing the query, remember that you need
+        // to use the ? notation (so you can fill in the blanks later)
+        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM songs WHERE albumId = ?")) {
+
+            // Fill in the blanks, i.e. parameterize the query
+            ps.setInt(1, albumId);
+            // TRY to execute the query
+            try (ResultSet rs = ps.executeQuery()) {
+                // Extract the information from the result set
+                // Use extraction method to avoid code repetition!
+                if(rs.next()) {
+                    songs.add(mapRow(rs));
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL Exception occurred when executing SQL or processing results.");
+                System.out.println("Error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception occurred when attempting to prepare SQL for execution");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the connection using the superclass method
+            super.freeConnection(conn);
+        }
+        return songs;
     }
 
     @Override
@@ -162,7 +234,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
         // Get a connection using the superclass
         Connection conn = super.getConnection();
 
-        String sql = "INSERT INTO songs (title, albumId, artistId, additionalInfo) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO songs (songTitle, albumId, artistId, additionalInfo) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, song.getSongTitle());
@@ -195,7 +267,7 @@ public class SongDAOimpl extends MySQLDao implements SongDAO{
         // Get the pieces of a customer from the resultset and create a new Customer
         Song s = Song.builder()
                 .songID(rs.getInt("songId"))
-                .songTitle(rs.getString("title"))
+                .songTitle(rs.getString("songTitle"))
                 .albumID(rs.getInt("albumId"))
                 .artistID(rs.getInt("artistId"))
                 .info(rs.getString("additionalInfo"))
