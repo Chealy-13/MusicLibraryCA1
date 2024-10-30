@@ -1,13 +1,12 @@
 package Persistence;
+import business.Rating;
 
-import lombok.Data;
+import java.sql.SQLException;
+import java.util.List;
 
-@Data
+public interface RatingDAO {
 
-public class RatingDAO {
-    private int ratingID;
-    private int userID;
-    private int songID;
-    private int rating;
+    boolean rateSong(int songId_, int userId_, int rating_)throws SQLException;
+
 
 }

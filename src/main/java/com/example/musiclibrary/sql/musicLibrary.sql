@@ -56,3 +56,14 @@ CREATE TABLE playlist
 
     CONSTRAINT fk_playlist_user FOREIGN KEY (userId) REFERENCES users(userId)
 );
+
+CREATE TABLE Rating (
+    ratingId INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT NOT NULL,
+    songId INT NOT NULL,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+
+FOREIGN KEY (userId ) REFERENCES Users(userId )
+
+
+);
