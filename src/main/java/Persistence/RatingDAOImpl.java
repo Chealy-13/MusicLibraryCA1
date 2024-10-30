@@ -11,6 +11,16 @@ public class RatingDAOImpl implements RatingDAO {
         this.connection = connection;
     }
 
+    /**
+     * Rates a song and inserts into the Ratings table.
+     * This method takes the user's rating for a song, ratings from range from 1 to 5.
+     *
+     * @param songId_ The ID of the song being rated.
+     * @param userId_ The ID of the user giving the rating.
+     * @param rating_ The rating value.
+     * @return true if the rating was successfully added to the database, false otherwise.
+     * @throws SQLException if a database access error occurs or the SQL problem.
+     */
     @Override
     public boolean rateSong(int songId_, int userId_, int rating_) throws SQLException {
         String sql = "INSERT INTO Ratings (songId, userId, rating) VALUES (?, ?, ?)";
