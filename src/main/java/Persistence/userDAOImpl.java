@@ -48,7 +48,6 @@ public class userDAOImpl implements userDAO {
     /**
      * Registers a new user by inserting their username, password, and email into the "users" table.
      * Excecutes an SL INSERT to add a new record to the "users"table
-     *
      * @param username the username of the new user, must be unique in the database.
      * @param password the password of the new user to be registered.
      * @param email the email of the new user to be registered.
@@ -85,7 +84,6 @@ public class userDAOImpl implements userDAO {
      * where it matches the username. If a match is found,
      * a User object is created and returned with the user's information. If no
      * users are found, or if an exception occurs the method will return null.
-     *
      * @param username the username of the user to be retrieved from the database.
      * @return a User object if found, or if no matching user is found.
      * @throws SQLException if there is an error executing the SQL statement or retrieving the results.

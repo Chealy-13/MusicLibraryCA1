@@ -1,7 +1,7 @@
 package com.example.musiclibrary;
 /**
- * @author Damian Magiera
- * D00229247
+ * @author Damian Magiera +
+ *
  */
 import Persistence.userDAO;
 import Persistence.userDAOImpl;

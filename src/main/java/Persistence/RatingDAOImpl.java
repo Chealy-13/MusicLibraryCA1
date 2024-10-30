@@ -19,7 +19,6 @@ public class RatingDAOImpl implements RatingDAO {
     /**
      * Rates a song and inserts into the Ratings table.
      * This method takes the user's rating for a song, ratings from range from 1 to 5.
-     *
      * @param songId_ The ID of the song being rated.
      * @param userId_ The ID of the user giving the rating.
      * @param rating_ The rating value.
@@ -42,7 +41,16 @@ public class RatingDAOImpl implements RatingDAO {
         }
         return false;
     }
-
+    /**
+     * Gets a list of ratings given by a specific user.
+     * This method executes a SQL query to collect all ratings associated with the
+     * user. It takes a list of Rating
+     * objects, each representing a rating associated with a song.
+     * @param userId_ the ID of the user whose ratings are to be collected
+     * @return a list of Rating objects containing the song IDs, user IDs, and ratings
+     * for the specified user. Returns an empty list if non are found.
+     * @throws SQLException if a database access error occurs or the SQL statement is wrong
+     */
     public List<RatingDAO> getRatingsByUser(int userId_) throws SQLException {
         String sql = "SELECT songId, userId, rating FROM Rating WHERE userId = ?";
 
