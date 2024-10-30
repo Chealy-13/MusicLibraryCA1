@@ -8,6 +8,15 @@ import java.util.List;
 
 public class SongDaoImpl extends MySQLDao implements SongDao {
 
+    /**
+     * Constructs a new instance of the SongDaoImpl class.
+     * This constructor initializes the data access object with the specified properties
+     * file name. It calls the superclass constructor to load the properties needed for
+     * database connections, such as driver, URL, database name, username, and password.
+     * @param propertiesFilename the name of the properties file containing database
+     * connection details; it cannot be null or empty.
+     * @throws IllegalArgumentException if the provided propertiesFilename is null or empty.
+     */
     public SongDaoImpl(String propertiesFilename) {
 
         super(propertiesFilename);

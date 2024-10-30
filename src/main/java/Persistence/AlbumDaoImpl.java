@@ -12,6 +12,15 @@ import java.util.List;
 
 public class AlbumDaoImpl extends MySQLDao implements AlbumDao {
 
+    /**
+     * Constructs a new instance of the AlbumDaoImpl class.
+     * This constructor initializes the data access object with the specified properties
+     * file name. It calls the superclass constructor to load the properties needed for
+     * database connections, such as driver, URL, database name, username, and password.
+     * @param propertiesFilename the name of the properties file containing database
+     * connection details; it cannot be null or empty.
+     * @throws IllegalArgumentException if the provided propertiesFilename is null or empty.
+     */
     public AlbumDaoImpl(String propertiesFilename) {
         super(propertiesFilename);
     }
