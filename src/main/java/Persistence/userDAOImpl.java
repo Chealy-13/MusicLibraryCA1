@@ -12,16 +12,24 @@ import java.sql.SQLException;
  * to manage user records in database.
  */
 public class userDAOImpl implements userDAO {
-
-    private static final String cardNumber = "^(\\d{16})$";
+    /**
+     * Validates information by checking the format of the details.
+     * */
+    private static final String cardNum = "^(\\d{16})$";
     private static final String expireDate = "^(0[1-9]|1[0-2])/\\d{2}$"; // MM/YY
     private static final String cvv = "^\\d{3,4}$";
     private final Connection connection;
 
-    public boolean validateCCInfo(String cardNumber, String expiryDate, String cvv) {
-        return cardNumber.matches(cardNumber) &&
-                expiryDate.matches(expireDate) &&
-                cvv.matches(cvv);
+    /**
+     *@param cardNumber the credit card number has to be exactly 16 digits with no spaces or lines.
+    * @param expireD the expiry date in a MM/YY format, from (01-12) and YY is the last two numbers of a year.
+    * @param cvv1 a 3 or 4 digit security code.
+    * @return {true} if all three pieces of information match the expected format. {false} otherwise
+     */
+    public boolean validateCCInfo(String cardNumber, String expireD, String cvv1) {
+        return cardNumber.matches(cardNum) &&
+                expireD.matches(expireDate) &&
+                cvv1.matches(cvv);
     }
     /**
      * Constructs a UserDAOImpl with the specified database connection.
@@ -34,10 +42,9 @@ public class userDAOImpl implements userDAO {
     /**
      * Registers a new user by inserting their username, password, and email into the "users" table.
      *
-     * @param username the username of the new user, must be unique in the database
-     * @return {@code true} if the user was successfully registered (i.e., one row was affected);
-     *         {@code false} if the insertion failed or an exception occurred
-     * @throws SQLException if a database access error occurs, or the SQL statement is invalid
+     * @param username the username of the new user, must be unique in the database.
+     * @return {true} if the user was successfully registered,{false} if the insertion failed or an exception occurred.
+     * @throws SQLException if a database access error occurs, or the SQL statement is invalid.
      */
 
     @Override

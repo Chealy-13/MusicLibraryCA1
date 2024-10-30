@@ -68,11 +68,11 @@ public class MusicLibraryApplication {
 		String cardNum = scanner.nextLine();
 
 		System.out.print("Enter your expiry date (MM/YY): ");
-		String expiryDate = scanner.nextLine();
+		String expireD = scanner.nextLine();
 
 		System.out.print("Enter your CVV: ");
-		String cvv = scanner.nextLine();
-		if (userDAO.validateCCInfo(cardNum, expiryDate, cvv)) {
+		String cvv1 = scanner.nextLine();
+		if (userDAO.validateCCInfo(cardNum, expireD, cvv1)) {
 
 			if (userDAO.RegisterU(username, password, email)) {
 				System.out.println("Registration successful!");
