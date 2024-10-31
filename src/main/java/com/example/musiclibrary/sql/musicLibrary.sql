@@ -1,6 +1,6 @@
 /**
  *
- * @author Damian
+ * @author Damian/Chris
  *
  */
 DROP DATABASE IF EXISTS musiclibary;

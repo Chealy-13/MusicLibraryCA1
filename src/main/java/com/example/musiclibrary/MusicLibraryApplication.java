@@ -1,6 +1,6 @@
 package com.example.musiclibrary;
 /**
- * @author Damian Magiera +
+ * @author Damian Magiera + Chris
  */
 
 import Persistence.*;
