@@ -11,7 +11,7 @@ import java.util.Properties;
  *
  */
 public class MySQLDao {
-    private Properties properties;
+    private Properties properties = new Properties();
     private Connection conn = null;
 
     /**
@@ -20,9 +20,14 @@ public class MySQLDao {
      * connection. The provided connection will be used for executing SQL queries and
      * managing transactions.
      */
-    public MySQLDao(){
-        this.conn = conn;
-    }
+//    public MySQLDao() {
+//        try {
+//            this.conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/", "root", "");
+//        } catch (SQLException e) {
+//            System.out.println("Failed to connect to the database.");
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Constructs a new instance of MySQLDao by loading database connection properties
@@ -35,18 +40,18 @@ public class MySQLDao {
      * @throws IOException if an error occurs while loading the properties from the file,
      * such as if the file is not found or cannot be read.
      */
-    public MySQLDao(String propertiesFilename) {
-        properties = new Properties();
-        try {
-            // Get the path to the specified properties file
-            String rootPath = Thread.currentThread().getContextClassLoader().getResource(propertiesFilename).getPath();
-            // Load in all key-value pairs from properties file
-            properties.load(new FileInputStream(rootPath));
-        }catch(IOException e){
-            System.out.println("An exception occurred when attempting to load properties from \"" + propertiesFilename + "\": " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+//    public MySQLDao(String propertiesFilename) {
+//        properties = new Properties();
+//        try {
+//            // Get the path to the specified properties file
+//            String rootPath = Thread.currentThread().getContextClassLoader().getResource(propertiesFilename).getPath();
+//            // Load in all key-value pairs from properties file
+//            properties.load(new FileInputStream(rootPath));
+//        }catch(IOException e){
+//            System.out.println("An exception occurred when attempting to load properties from \"" + propertiesFilename + "\": " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Retrieves a database connection using the properties in the properties file.

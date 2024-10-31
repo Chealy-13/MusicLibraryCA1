@@ -15,14 +15,14 @@ import java.util.List;
  * Implementation of the UserDAO interface
  * to manage user records in database.
  */
-public class userDAOImpl implements userDAO {
+public class userDAOImpl extends MySQLDao implements userDAO {
     /**
      * Validates information by checking the format of the details.
      */
     private static final String cardNum = "^(\\d{16})$";
     private static final String expireDate = "^(0[1-9]|1[0-2])/\\d{2}$"; // MM/YY
     private static final String cvv = "^\\d{3,4}$";
-    private final Connection connection;
+
 
     /**
      * @param cardNumber the credit card number has to be exactly 16 digits.
@@ -41,9 +41,9 @@ public class userDAOImpl implements userDAO {
      *
      * @param con is the Connection object to connect to the database.
      */
-    public userDAOImpl(Connection con) {
-        this.connection = con;
-    }
+//    public userDAOImpl(Connection con) {
+//        this.connection = con;
+//    }
 
     /**
      * Registers a new user by inserting their username, password, and email into the "users" table.
@@ -59,7 +59,7 @@ public class userDAOImpl implements userDAO {
     public boolean RegisterU(String username, String password, String email) {
         //This ine is used instert row to "users" table with values: useranme, password, email.
         String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-        try (PreparedStatement state = connection.prepareStatement(sql)) {
+        try (PreparedStatement state = getConnection().prepareStatement(sql)) {
             // Set the first '?' placeholder in the SQL query to the user's username
             state.setString(1, username);
             // Set the second '?' placeholder in the SQL query to the user's password
@@ -92,7 +92,7 @@ public class userDAOImpl implements userDAO {
     public user LoginU(String username) {
         //This SQL query selects all fields from the 'users' table where the username matches
         String sql = "SELECT * FROM users WHERE username = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             // Sets the first parameter in the SQL query to the provided 'username'
             ps.setString(1, username);
             try (ResultSet rs = ps.executeQuery()) {
@@ -135,7 +135,7 @@ public class userDAOImpl implements userDAO {
         //Sql delete query is used to remove a user with specified username
         String sql = "DELETE FROM users WHERE username = ?";
         //This line is used to stop sql injection and handle parameters safely
-        try (PreparedStatement state = connection.prepareStatement(sql)) {
+        try (PreparedStatement state = getConnection().prepareStatement(sql)) {
             //Username provided as a method parameter will replace the '?'
             state.setString(1, username);
             //This line runs the delete operation, it returns the number of rows affected

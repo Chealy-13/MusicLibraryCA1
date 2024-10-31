@@ -21,10 +21,10 @@ public class SongDaoImpl extends MySQLDao implements SongDao {
      * connection details; it cannot be null or empty.
      * @throws IllegalArgumentException if the provided propertiesFilename is null or empty.
      */
-    public SongDaoImpl(String propertiesFilename) {
-
-        super(propertiesFilename);
-    }
+//    public SongDaoImpl(String propertiesFilename) {
+//
+//        super(propertiesFilename);
+//    }
 
 //    public static void main(String[] args) {
 //        CustomerDao customerDao = new CustomerDaoImpl("database.properties");
@@ -107,7 +107,7 @@ public class SongDaoImpl extends MySQLDao implements SongDao {
             try (ResultSet rs = ps.executeQuery()) {
                 // Extract the information from the result set
                 // Use extraction method to avoid code repetition!
-                if(rs.next()) {
+                while(rs.next()) {
                     songs.add(mapRow(rs));
                 }
             } catch (SQLException e) {
@@ -195,7 +195,7 @@ public class SongDaoImpl extends MySQLDao implements SongDao {
             try (ResultSet rs = ps.executeQuery()) {
                 // Extract the information from the result set
                 // Use extraction method to avoid code repetition!
-                if(rs.next()) {
+                while(rs.next()) {
                     songs.add(mapRow(rs));
                 }
             } catch (SQLException e) {
@@ -242,7 +242,7 @@ public class SongDaoImpl extends MySQLDao implements SongDao {
             try (ResultSet rs = ps.executeQuery()) {
                 // Extract the information from the result set
                 // Use extraction method to avoid code repetition!
-                if(rs.next()) {
+                while(rs.next()) {
                     songs.add(mapRow(rs));
                 }
             } catch (SQLException e) {

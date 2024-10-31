@@ -33,23 +33,16 @@ public class Song implements Comparable<Song>{
 //            );
     @EqualsAndHashCode.Include
     private int songID;
-
-    @NonNull
-    private int albumID;
-
-    @NonNull
-    private int artistID;
-
     @NonNull
     private String songTitle;
-
+    @NonNull
+    private int albumID;
+    @NonNull
+    private int artistID;
     @NonNull
     private String info;
 
-    //AlbumDaoImpl getSongsForAlbum method not recognising songtitle or albumids type
-    // so had to generate constructor
-    public Song(int songId, String songTitle, int albumId, int artistId, String additionalInfo) {
-    }
+
 
     /**
      * Compares this song with another song based on the song ID.

@@ -24,9 +24,9 @@ public class ArtistDaoImpl extends MySQLDao implements ArtistDao {
      * connection details; it cannot be null or empty.
      * @throws IllegalArgumentException if the provided propertiesFilename is null or empty.
      */
-    public ArtistDaoImpl(String propertiesFilename) {
-        super(propertiesFilename);
-    }
+//    public ArtistDaoImpl(String propertiesFilename) {
+//        super(propertiesFilename);
+//    }
 
     /**
      * Retrieves an Artist object by its artist ID.
@@ -99,7 +99,7 @@ public class ArtistDaoImpl extends MySQLDao implements ArtistDao {
             try (ResultSet rs = ps.executeQuery()) {
                 // Extract the information from the result set
                 // Use extraction method to avoid code repetition!
-                if (rs.next()) {
+                while (rs.next()) {
                     artists.add(mapRow(rs));
                 }
             } catch (SQLException e) {

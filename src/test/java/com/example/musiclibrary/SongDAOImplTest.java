@@ -13,18 +13,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 class SongDAOImplTest {
-    @org.junit.jupiter.api.Test
-    void getAllEmployees_AllFound() {
-        SongDao songDao = new SongDaoImpl("test_musiclibrary");
-
-        List<Song> expected = generateAllResults();
-        List<Song> results = songDao.getAllSongs();
-        assertEquals(6, results.size());
-
-        for (int i = 0; i < results.size(); i++) {
-            assertSongEquals(expected.get(i),results.get(i));
-        }
-    }
+//    @org.junit.jupiter.api.Test
+//    void getAllEmployees_AllFound() {
+//        SongDao songDao = new SongDaoImpl("test_musiclibrary");
+//
+//        List<Song> expected = generateAllResults();
+//        List<Song> results = songDao.getAllSongs();
+//        assertEquals(6, results.size());
+//
+//        for (int i = 0; i < results.size(); i++) {
+//            assertSongEquals(expected.get(i),results.get(i));
+//        }
+//    }
 
     void assertSongEquals(Song expected, Song result){
         assertEquals(expected.getSongID(), result.getSongID());

@@ -36,7 +36,7 @@ public class Album {
     @NonNull
     private String albumTitle;
     private int artistId;
-    private int releaseYear;
+    private Date releaseDate;
 
     private List<Song> songs;
 }
